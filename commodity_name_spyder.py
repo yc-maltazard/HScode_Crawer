@@ -21,16 +21,16 @@ headers = {'User-Agent': User_Agent}
 hscode_file = open('hscode.txt',encoding='UTF-8')
 line = hscode_file.readline()
 #print(line)
-
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'X:\Python34\Scripts\chromedriver.exe')
 
 for line in hscode_file:
     hscode = line.strip()
     #print(hscode)
     url = 'http://www.hs-bianma.com/search.php?ser=' + hscode +'&flag=1'
     print(url)
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=r'X:\Python34\Scripts\chromedriver.exe')
+
     #def LoadPageContent(self,page):
         #记录开始时间
     #    begin_time = datetime.datetime.now()
@@ -56,5 +56,5 @@ for line in hscode_file:
                 #print(result[0])
                 writer.writerow(data)
             csvfile.close()
-    driver.quit()
+driver.quit()
 hscode_file.close()
